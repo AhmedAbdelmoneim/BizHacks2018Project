@@ -1,0 +1,15 @@
+{
+  "name": "bizhacks2018",
+  "version": "1.0.0",
+  "description": "A bot to answer customers general questions created for besty buy as part of BizHacks 2018",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "botbuilder": "^3.14.1",
+    "restify": "^7.0.0"
+  }
+}
