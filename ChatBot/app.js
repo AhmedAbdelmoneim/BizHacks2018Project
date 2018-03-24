@@ -39,16 +39,13 @@ bot.dialog('returnItem', [
 
     // Ask for Date
     function(session, args) {
-      console.log(session.message.text);
       var id = session.message.text;
        if (id){
-           var url = "http://localhost:8000/" + id;
+           var url = 'http://localhost:8000/21372';
            request(url,function(error,response,body){
                body = JSON.parse(body);
-               console.log(body);
-               temp = body.a;
-               console.log(temp);
-               session.send("temp");
+               temp = body;
+               session.send(temp);
            });
            builder.Prompts.text(session, "API Call. (CHANGE LATER!)");
       }
