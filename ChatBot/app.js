@@ -34,7 +34,7 @@ bot.dialog('returnItem', [
     },
     // Ask for ID number
     function (session) {
-        builder.Prompts.text(session, 'Please insert product ID number?');
+        builder.Prompts.text(session, 'Please insert 8-digit product ID number');
     },
 
     // Ask for Date
