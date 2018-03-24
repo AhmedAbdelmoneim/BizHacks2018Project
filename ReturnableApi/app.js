@@ -5,6 +5,18 @@ var bodyParser     = require('body-parser');
 var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 
+// Home page
+app.get('/', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ a: 1 }, null, 3));
+})
+
+// Post Request with ID
+app.post('/:id', function(req, res, next){
+    console.log(req.params.id);
+    res.redirect("/");
+});
+
  // Start up server
  app.listen(8000, function () {
    console.log('Server Started!');

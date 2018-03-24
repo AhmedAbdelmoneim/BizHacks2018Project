@@ -1,5 +1,6 @@
 var restify = require('restify');
 var builder = require('botbuilder');
+var request = require('request');
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -37,6 +38,21 @@ bot.dialog('returnItem', [
     },
 
     // Ask for Date
+    function(session, args) {
+      console.log(session.message.text);
+      var id = session.message.text;
+       if (id){
+           var url = "http://localhost:8000/" + id;
+           request(url,function(error,response,body){
+               body = JSON.parse(body);
+               console.log(body);
+               temp = body.a;
+               console.log(temp);
+               session.send("temp");
+           });
+           builder.Prompts.text(session, "API Call. (CHANGE LATER!)");
+      }
+    },
 
     // Ask if item has been opened
     function(session) {
