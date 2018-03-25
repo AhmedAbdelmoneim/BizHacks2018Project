@@ -38,7 +38,7 @@ server.post('/api/messages', connector.listen());
 
 // Start first dialogue
 bot.dialog('/startD', intents, function (session, args, next) {
-	session.send('Hello!, how can I help you?')
+	session.send('Hello! How can I help you?')
 })
 
 // Add QnA and LUIS recognizers
@@ -98,15 +98,21 @@ bot.dialog('returnItem', [
       if (!results.response) {
         builder.Prompts.confirm(session, "Are you sure you want to return the item?");
       } else {
-        session.endDialog('Sorry, this item is not returnable');
+        session.endDialog('Sorry, this item can not be returned because the item has been opened');
       }
     },
 
     // Feedback
+    function(session, results) {
+      session.send("Looks like your item does qualify for a return, please follow through this link to submit an online form for your return request: www.bestbuy.ca/returnForm");
+      var reply = new builder.Message()
+                             .addAttachment({ fallbacktext: 'couldn', contentType: 'image/jpeg', contentUrl: "https://smallbiztrends.com/wp-content/uploads/2014/06/endicia.jpg"});
+      session.endDialog(reply);
+    },
 
     // End Dialog
     function (session, results) {
-        session.endDialog('Sorry, this item is not returnable');
+        session.endDialog('Sorry, this item does not seem to qualify for return as per our return policy');
     }
 ]);
 
@@ -114,6 +120,6 @@ bot.dialog('returnItem', [
 // Answer if none of the intents match or no answer in QnA knowledge base
 intents.onDefault([
   function(session){
-      session.send('Sorry, but we can not seem to find an answer to your question at the present moment. For further assistance with this question please call 1-866-237-8289.');
+      session.send('Sorry, but we can not seem to find an answer to your question at the present moment. For further assistance with this question please call 1-866-237-8289. When prompted by the operator, you can enter this code: "1728"');
 	}
 ]);
